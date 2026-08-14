@@ -1,7 +1,7 @@
 import PageHome from '../pages/PageHome';
 import PageMovieSearch from '../pages/PageMovieSearch';
 
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Link } from 'react-router-dom';
 
 export const App = () => {
     return (
@@ -9,10 +9,10 @@ export const App = () => {
             <nav>
                 <ul>
                     <li>
-                        <a href="/">Home</a>
+                        <Link to="/">Home</Link>
                     </li>
                     <li>
-                        <a href="/movies/search">Movies Search</a>
+                        <Link to="/movies/search">Movies Search</Link>
                     </li>
                 </ul>
             </nav>
