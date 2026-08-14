@@ -1,7 +1,7 @@
 import PageHome from '../pages/PageHome';
 import PageMovieSearch from '../pages/PageMovieSearch';
 
-import { Route, Routes, Link } from 'react-router-dom';
+import { Route, Routes, NavLink } from 'react-router-dom';
 
 export const App = () => {
     return (
@@ -9,10 +9,20 @@ export const App = () => {
             <nav>
                 <ul>
                     <li>
-                        <Link to="/">Home</Link>
+                        <NavLink
+                            to={'/'}
+                            style={({ isActive }) => ({ fontWeight: isActive ? 700 : 400 })}
+                        >
+                            Home
+                        </NavLink>
                     </li>
                     <li>
-                        <Link to="/movies/search">Movies Search</Link>
+                        <NavLink
+                            to={'/movies/search'}
+                            style={({ isActive }) => ({ fontWeight: isActive ? 700 : 400 })}
+                        >
+                            Movies Search
+                        </NavLink>
                     </li>
                 </ul>
             </nav>
