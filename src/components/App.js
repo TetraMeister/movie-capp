@@ -1,29 +1,17 @@
 import PageHome from '../pages/PageHome';
 import PageMovieSearch from '../pages/PageMovieSearch';
 
-import { Route, Routes, NavLink } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+
+import NavLink from './NavLink';
 
 export const App = () => {
     return (
         <div>
             <nav>
                 <ul>
-                    <li>
-                        <NavLink
-                            to={'/'}
-                            style={({ isActive }) => ({ fontWeight: isActive ? 700 : 400 })}
-                        >
-                            Home
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink
-                            to={'/movies/search'}
-                            style={({ isActive }) => ({ fontWeight: isActive ? 700 : 400 })}
-                        >
-                            Movies Search
-                        </NavLink>
-                    </li>
+                    <NavLink to={'/'}>Home</NavLink>
+                    <NavLink to={'/movies/search'}>Movies Search</NavLink>
                 </ul>
             </nav>
             <Routes>
