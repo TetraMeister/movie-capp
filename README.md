@@ -1,4 +1,7 @@
+
+<p style='display: flex; justify-content: center; align-items: center'>
 ![screen or GIF of your app](https://via.placeholder.com/1000x300)
+</p>
 
 
 # Movie Capp
