@@ -1,10 +1,12 @@
+import './App.module.css';
+
 import PageHome from '../pages/PageHome';
 import PageMovieSearch from '../pages/PageMovieSearch';
 
 import { Route, Routes } from 'react-router-dom';
 
 import NavLink from './NavLink';
-import NavBar from './NavBar';
+import { NavBar } from './NavBar/NavBar';
 
 export const App = () => {
     return (
