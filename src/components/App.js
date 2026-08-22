@@ -19,8 +19,9 @@ export const App = () => {
 
             <Routes>
                 <Route element={<PageHome />} path="/" />
-                <Route element={<PageMovieSearch />} path="/movies/search" />
-                <Route element={<PageMoviesSearchResults />} path="/movies/search/:searchPhrase" />
+                <Route element={<PageMovieSearch />} path="/movies/search">
+                    <Route element={<PageMoviesSearchResults />} path=":searchPhrase" />
+                </Route>
             </Routes>
         </div>
     );

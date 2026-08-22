@@ -5,7 +5,7 @@
 .liEl::after {
   position: absolute;
   content: '';
-  background-color: violet;
+  background-color: darkblue;
   width: 0%;
   height: 2px;
   left: 0;
@@ -15,4 +15,8 @@
 
 .liEl:hover::after {
   width: 100%;
+}
+
+a {
+  color: black;
 }

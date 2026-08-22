@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Outlet } from 'react-router-dom';
 
 export const PageMovieSearch = () => {
     const navigate = useNavigate();
@@ -11,6 +11,7 @@ export const PageMovieSearch = () => {
                 value={searchPhrase || ''}
                 onChange={(e) => navigate(e.target.value.replaceAll('/', ''))}
             />
+            <Outlet />
         </div>
     );
 };
