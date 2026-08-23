@@ -5,6 +5,7 @@ import PageMovieSearch from '../pages/PageMovieSearch';
 import PageMoviesSearchResults from '../pages/PageMoviesSearchResults';
 import PageLogin from '../pages/PageLogin';
 import PageLogout from '../pages/PageLogout';
+import Page404 from '../pages/Page404';
 
 import { Route, Routes } from 'react-router-dom';
 
@@ -26,9 +27,9 @@ export const App = () => {
             ) : null}
 
             <Routes>
-                <Route element={<PageLogout />} path="/logout" />
                 {isUserLoggedIn ? (
                     <>
+                        <Route element={<Page404 />} path="*" />
                         <Route element={<PageHome />} path="/" />
                         <Route element={<PageMovieSearch />} path="/movies/search">
                             <Route
@@ -37,9 +38,10 @@ export const App = () => {
                             />
                             <Route element={<PageMoviesSearchResults />} path=":searchPhrase" />
                         </Route>
+                        <Route element={<PageLogout />} path="/logout" />
                     </>
                 ) : (
-                    <Route element={<PageLogin />} path="/" />
+                    <Route element={<PageLogin />} path="*" />
                 )}
             </Routes>
         </div>
