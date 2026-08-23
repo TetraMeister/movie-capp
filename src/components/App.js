@@ -1,7 +1,5 @@
 import './App.module.css';
 
-import React from 'react';
-
 import PageHome from '../pages/PageHome';
 import PageMovieSearch from '../pages/PageMovieSearch';
 import PageMoviesSearchResults from '../pages/PageMoviesSearchResults';
@@ -12,27 +10,10 @@ import { Route, Routes } from 'react-router-dom';
 
 import { NavLink } from './NavLink';
 import { NavBar } from './NavBar/NavBar';
+import { useUser } from '../contexts/UserContext';
 
 export const App = () => {
-    const [isUserLoggedIn, setIsUserLoggedIn] = React.useState(
-        localStorage.getItem('isUserLoggedIn') === true
-    );
-
-    const logOut = React.useCallback(() => {
-        setIsUserLoggedIn(false);
-    }, []);
-
-    const logIn = React.useCallback(() => {
-        setIsUserLoggedIn(true);
-    }, []);
-
-    React.useEffect(() => {
-        if (isUserLoggedIn) {
-            localStorage.setItem('isUserLoggedIn', 'true');
-        } else {
-            localStorage.removeItem('isUserLoggedIn');
-        }
-    }, [isUserLoggedIn]);
+    const { isUserLoggedIn, logIn, logOut } = useUser();
 
     return (
         <div>
