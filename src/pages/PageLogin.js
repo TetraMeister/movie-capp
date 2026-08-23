@@ -1,5 +1,7 @@
-export const PageLogin = (params) => {
-    const { logIn } = params;
+import { useUser } from '../contexts/UserContext';
+
+export const PageLogin = () => {
+    const { logIn } = useUser();
     return (
         <div>
             PageLogin

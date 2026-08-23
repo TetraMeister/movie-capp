@@ -13,7 +13,7 @@ import { NavBar } from './NavBar/NavBar';
 import { useUser } from '../contexts/UserContext';
 
 export const App = () => {
-    const { isUserLoggedIn, logIn, logOut } = useUser();
+    const { isUserLoggedIn } = useUser();
 
     return (
         <div>
@@ -26,7 +26,7 @@ export const App = () => {
             ) : null}
 
             <Routes>
-                <Route element={<PageLogout onLogOut={logOut} />} path="/logout" />
+                <Route element={<PageLogout />} path="/logout" />
                 {isUserLoggedIn ? (
                     <>
                         <Route element={<PageHome />} path="/" />
@@ -35,7 +35,7 @@ export const App = () => {
                         </Route>
                     </>
                 ) : (
-                    <Route element={<PageLogin logIn={logIn} />} path="/" />
+                    <Route element={<PageLogin />} path="/" />
                 )}
             </Routes>
         </div>
