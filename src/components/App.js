@@ -4,6 +4,7 @@ import PageHome from '../pages/PageHome';
 import PageMovieSearch from '../pages/PageMovieSearch';
 import PageMoviesSearchResults from '../pages/PageMoviesSearchResults';
 import PageLogin from '../pages/PageLogin';
+import PageMovieDetails from '../pages/PageMovieDetails';
 import PageLogout from '../pages/PageLogout';
 import Page404 from '../pages/Page404';
 
@@ -38,6 +39,7 @@ export const App = () => {
                             />
                             <Route element={<PageMoviesSearchResults />} path=":searchPhrase" />
                         </Route>
+                        <Route element={<PageMovieDetails />} path="/movies/:movieId" />
                         <Route element={<PageLogout />} path="/logout" />
                     </>
                 ) : (
