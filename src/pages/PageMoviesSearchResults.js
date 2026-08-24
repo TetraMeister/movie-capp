@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { NavLink } from 'react-router-dom';
+
 import { useParams } from 'react-router-dom';
 
 import { useAsyncFn } from 'react-use';
@@ -21,18 +23,20 @@ export const PageMoviesSearchResult = () => {
         <div>
             {getMoviesState.loading && <p>Loading...</p>}
             {getMoviesState.error && <p>ERROR: {getMoviesState.error.message}</p>}
-            {getMoviesState.value ? (
+            {getMoviesState.value && !getMoviesState.loading ? (
                 <ul>
                     {getMoviesState.value.map((movie) => {
                         return (
                             <li key={movie.imdbID}>
-                                {movie.Year} | {movie.Title}
+                                <NavLink to={`/movies/${movie.imdbID}`}>
+                                    {movie.Year} | {movie.Title}
+                                </NavLink>
                             </li>
                         );
                     })}
                 </ul>
             ) : (
-                <p>No data available.</p>
+                !getMoviesState.loading && <p>No data available.</p>
             )}
         </div>
     );
