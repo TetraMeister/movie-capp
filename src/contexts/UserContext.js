@@ -9,7 +9,7 @@ export const useUser = () => {
 
 export const UserContextProvider = ({ children }) => {
     const [isUserLoggedIn, setIsUserLoggedIn] = React.useState(
-        localStorage.getItem('isUserLoggedIn') === true
+        localStorage.getItem('isUserLoggedIn') === 'true'
     );
 
     const logOut = React.useCallback(() => {
