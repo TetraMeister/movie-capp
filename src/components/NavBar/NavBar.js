@@ -36,7 +36,10 @@ export const NavBar = (props) => {
             >
                 <BurgerIcon />
             </button>
-            <ul className={`${isOpen ? styles.open : ''}`} onClick={handleUlClick}>
+            <ul
+                className={`${isOpen ? styles.open : ''} ${styles.ulNavBar}`}
+                onClick={handleUlClick}
+            >
                 {children}
             </ul>
             {isOpen && <div className={styles.overlay} onClick={closeMenu} aria-hidden="true" />}
