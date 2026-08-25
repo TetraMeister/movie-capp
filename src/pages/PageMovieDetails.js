@@ -6,6 +6,8 @@ import { getMovieById as getMovieApiCall } from '../api/getMovieById';
 
 import { useParams } from 'react-router-dom';
 
+import { MovieDetails } from '../components/MovieDetails';
+
 export const PageMovieDetails = () => {
     const { movieId } = useParams();
 
@@ -15,31 +17,11 @@ export const PageMovieDetails = () => {
         getMovieById(movieId);
     }, [getMovieById, movieId]);
 
-    const Details = () => (
-        <article>
-            <div>
-                <img src={getMovieByIdState.value.Poster} />
-            </div>
-            <h1>{getMovieByIdState.value.Title}</h1>
-            <p>
-                {getMovieByIdState.value.Year} | {getMovieByIdState.value.Runtime} |{' '}
-                {getMovieByIdState.value.Genre}
-            </p>
-            <p>{getMovieByIdState.value.Plot}</p>
-            <footer>
-                <p>
-                    Director: <span>{getMovieByIdState.value.Director}</span>
-                </p>
-                <p>Rating: {getMovieByIdState.value.imdbRating}</p>
-            </footer>
-        </article>
-    );
-
     return (
         <>
             {getMovieByIdState.value &&
                 !getMovieByIdState.loading &&
-                !getMovieByIdState.value?.Error && <Details />}
+                !getMovieByIdState.value?.Error && <MovieDetails value={getMovieByIdState.value} />}
             {!getMovieByIdState.value && !getMovieByIdState.loading && !getMovieByIdState.error && (
                 <p>No data available.</p>
             )}
