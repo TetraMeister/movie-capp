@@ -7,31 +7,35 @@ export const useUser = () => {
     return React.useContext(UserContext);
 };
 
+const USER_NAME_KEY = 'userName';
+
 export const UserContextProvider = ({ children }) => {
-    const [isUserLoggedIn, setIsUserLoggedIn] = React.useState(
-        localStorage.getItem('isUserLoggedIn') === 'true'
-    );
+    const [userName, setUserName] = React.useState(() => localStorage.getItem(USER_NAME_KEY));
+
+    const isUserLoggedIn = Boolean(userName);
 
     const logOut = React.useCallback(() => {
-        setIsUserLoggedIn(false);
+        setUserName(null);
     }, []);
 
-    const logIn = React.useCallback(() => {
-        setIsUserLoggedIn(true);
+    const logIn = React.useCallback((name) => {
+        setUserName(name);
     }, []);
 
     React.useEffect(() => {
-        if (isUserLoggedIn) {
-            localStorage.setItem('isUserLoggedIn', 'true');
+        if (userName) {
+            localStorage.setItem(USER_NAME_KEY, userName);
         } else {
-            localStorage.removeItem('isUserLoggedIn');
+            localStorage.removeItem(USER_NAME_KEY);
         }
-    }, [isUserLoggedIn]);
-    return (
-        <UserContext.Provider value={{ isUserLoggedIn, logIn, logOut }}>
-            {children}
-        </UserContext.Provider>
+    }, [userName]);
+
+    const value = React.useMemo(
+        () => ({ isUserLoggedIn, userName, logIn, logOut }),
+        [isUserLoggedIn, userName, logIn, logOut]
     );
+
+    return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
 
 UserContextProvider.propTypes = {

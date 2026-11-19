@@ -2,6 +2,8 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
+import { Link } from 'react-router-dom';
+
 import { ReactComponent as BurgerIcon } from '../../assets/burger-menu-svgrepo-com.svg';
 
 import styles from './NavBar.module.css';
@@ -26,12 +28,15 @@ export const NavBar = (props) => {
     };
 
     return (
-        <nav>
+        <nav className={styles.nav}>
+            <Link to={'/'} className={styles.brand} onClick={closeMenu}>
+                🎬 Movie Capp
+            </Link>
             <button
                 type="button"
                 className={styles.burger}
                 onClick={toggleMenu}
-                aria-label="Open Menu"
+                aria-label={isOpen ? 'Close Menu' : 'Open Menu'}
                 aria-expanded={isOpen}
             >
                 <BurgerIcon />

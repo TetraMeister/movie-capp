@@ -1,0 +1,13 @@
+.poster {
+    object-fit: cover;
+    background-color: var(--color-surface-hover);
+}
+
+.placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-surface-hover);
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+}
