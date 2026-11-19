@@ -4,12 +4,16 @@ import { useAsyncFn } from 'react-use';
 
 import { getMovieById as getMovieApiCall } from '../api/getMovieById';
 
-import { useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { MovieDetails } from '../components/MovieDetails';
 
+import styles from './Pages.module.css';
+
 export const PageMovieDetails = () => {
     const { movieId } = useParams();
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const [getMovieByIdState, getMovieById] = useAsyncFn(getMovieApiCall);
 
@@ -17,20 +21,27 @@ export const PageMovieDetails = () => {
         getMovieById(movieId);
     }, [getMovieById, movieId]);
 
+    const goBack = () => {
+        if (location.key === 'default') {
+            navigate('/movies/search');
+        } else {
+            navigate(-1);
+        }
+    };
+
     return (
-        <>
-            {getMovieByIdState.value &&
-                !getMovieByIdState.loading &&
-                !getMovieByIdState.value?.Error && <MovieDetails value={getMovieByIdState.value} />}
-            {!getMovieByIdState.value && !getMovieByIdState.loading && !getMovieByIdState.error && (
-                <p>No data available.</p>
+        <div className="container">
+            <button type="button" className={`btn btn--ghost ${styles.backBtn}`} onClick={goBack}>
+                ← Back
+            </button>
+            {getMovieByIdState.loading && <p className="status">Loading...</p>}
+            {!getMovieByIdState.loading && getMovieByIdState.error && (
+                <p className="status status--error">ERROR: {getMovieByIdState.error.message}</p>
             )}
-            {getMovieByIdState.value?.Error &&
-                !getMovieByIdState.loading &&
-                !getMovieByIdState.error && <p>{getMovieByIdState.value.Error}</p>}
-            {getMovieByIdState.error && <p>Error occurred</p>}
-            {getMovieByIdState.loading && <p>Loading...</p>}
-        </>
+            {!getMovieByIdState.loading && getMovieByIdState.value && (
+                <MovieDetails value={getMovieByIdState.value} />
+            )}
+        </div>
     );
 };
 

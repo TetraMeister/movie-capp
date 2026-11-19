@@ -1,5 +1,3 @@
-import './App.module.css';
-
 import PageHome from '../pages/PageHome';
 import PageMovieSearch from '../pages/PageMovieSearch';
 import PageMoviesSearchResults from '../pages/PageMoviesSearchResults';
@@ -18,7 +16,7 @@ export const App = () => {
     const { isUserLoggedIn } = useUser();
 
     return (
-        <div>
+        <>
             {isUserLoggedIn ? (
                 <NavBar>
                     <NavLink to={'/'}>Home</NavLink>
@@ -27,26 +25,32 @@ export const App = () => {
                 </NavBar>
             ) : null}
 
-            <Routes>
-                {isUserLoggedIn ? (
-                    <>
-                        <Route element={<Page404 />} path="*" />
-                        <Route element={<PageHome />} path="/" />
-                        <Route element={<PageMovieSearch />} path="/movies/search">
-                            <Route
-                                index={true}
-                                element={<p>Start typing to search our movies database...</p>}
-                            />
-                            <Route element={<PageMoviesSearchResults />} path=":searchPhrase" />
-                        </Route>
-                        <Route element={<PageMovieDetails />} path="/movies/:movieId" />
-                        <Route element={<PageLogout />} path="/logout" />
-                    </>
-                ) : (
-                    <Route element={<PageLogin />} path="*" />
-                )}
-            </Routes>
-        </div>
+            <main>
+                <Routes>
+                    {isUserLoggedIn ? (
+                        <>
+                            <Route element={<Page404 />} path="*" />
+                            <Route element={<PageHome />} path="/" />
+                            <Route element={<PageMovieSearch />} path="/movies/search">
+                                <Route
+                                    index={true}
+                                    element={
+                                        <p className="status">
+                                            Start typing to search our movies database...
+                                        </p>
+                                    }
+                                />
+                                <Route element={<PageMoviesSearchResults />} path=":searchPhrase" />
+                            </Route>
+                            <Route element={<PageMovieDetails />} path="/movies/:movieId" />
+                            <Route element={<PageLogout />} path="/logout" />
+                        </>
+                    ) : (
+                        <Route element={<PageLogin />} path="*" />
+                    )}
+                </Routes>
+            </main>
+        </>
     );
 };
 

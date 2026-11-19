@@ -8,13 +8,9 @@ export const PageLogout = () => {
 
     React.useEffect(() => {
         logOut();
-    }, []);
+    }, [logOut]);
 
-    return (
-        <div>
-            <Navigate to={'/'} />
-        </div>
-    );
+    return <Navigate to={'/'} replace />;
 };
 
 export default PageLogout;

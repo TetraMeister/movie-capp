@@ -23,5 +23,16 @@
       "version": "detect"
     }
   },
-  "rules": {}
+  "rules": {},
+  "overrides": [
+    {
+      "files": [
+        "**/*.test.js",
+        "src/setupTests.js"
+      ],
+      "env": {
+        "jest": true
+      }
+    }
+  ]
 }

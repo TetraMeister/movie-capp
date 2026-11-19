@@ -1,44 +1,42 @@
 import React from 'react';
 
-import { NavLink } from 'react-router-dom';
-
 import { useParams } from 'react-router-dom';
 
 import { useAsyncFn } from 'react-use';
 
 import { getMovies as getMoviesApiRequest } from '../api/getMovies';
 
+import { MovieCard } from '../components/MovieCard';
+
+import styles from './Pages.module.css';
+
 export const PageMoviesSearchResult = () => {
     const { searchPhrase } = useParams();
 
-    const [getMoviesState, getMovies] = useAsyncFn(getMoviesApiRequest);
+    const [getMoviesState, getMovies] = useAsyncFn(getMoviesApiRequest, [], { loading: true });
 
     React.useEffect(() => {
         if (searchPhrase) {
             getMovies(searchPhrase);
         }
-    }, [searchPhrase]);
+    }, [getMovies, searchPhrase]);
+
+    const { loading, error, value } = getMoviesState;
+
+    if (loading) return <p className="status">Loading...</p>;
+
+    if (error) return <p className="status status--error">ERROR: {error.message}</p>;
+
+    if (!value || value.length === 0) {
+        return <p className="status">No movies found for &quot;{searchPhrase}&quot;.</p>;
+    }
 
     return (
-        <div>
-            {getMoviesState.loading && <p>Loading...</p>}
-            {getMoviesState.error && <p>ERROR: {getMoviesState.error.message}</p>}
-            {getMoviesState.value && !getMoviesState.loading ? (
-                <ul>
-                    {getMoviesState.value.map((movie) => {
-                        return (
-                            <li key={movie.imdbID}>
-                                <NavLink to={`/movies/${movie.imdbID}`}>
-                                    {movie.Year} | {movie.Title}
-                                </NavLink>
-                            </li>
-                        );
-                    })}
-                </ul>
-            ) : (
-                !getMoviesState.loading && <p>No data available.</p>
-            )}
-        </div>
+        <ul className={styles.results}>
+            {value.map((movie) => (
+                <MovieCard key={movie.imdbID} movie={movie} />
+            ))}
+        </ul>
     );
 };
 

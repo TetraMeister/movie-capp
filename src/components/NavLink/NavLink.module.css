@@ -1,22 +1,22 @@
 .liEl {
-  position: relative;
+    position: relative;
 }
 
 .liEl::after {
-  position: absolute;
-  content: '';
-  background-color: darkblue;
-  width: 0%;
-  height: 2px;
-  left: 0;
-  top: 100%;
-  transition: all 250ms ease-in-out;
+    position: absolute;
+    content: '';
+    background-color: var(--color-accent);
+    width: 0%;
+    height: 2px;
+    left: 0;
+    top: 100%;
+    transition: all 250ms ease-in-out;
 }
 
 .liEl:hover::after {
-  width: 100%;
+    width: 100%;
 }
 
-a {
-  color: black;
+.liEl > a {
+    color: var(--color-text);
 }

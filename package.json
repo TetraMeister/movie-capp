@@ -2,6 +2,7 @@
   "name": "movie-capp",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://tetrameister.github.io/movie-capp",
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
@@ -19,7 +20,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint src",
+    "format": "prettier --write src"
   },
   "eslintConfig": {
     "extends": [
@@ -44,5 +47,11 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-react": "^7.37.5",
     "prettier": "^3.9.6"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^react-router/dom$": "<rootDir>/node_modules/react-router/dist/development/dom-export.js",
+      "\\.svg$": "<rootDir>/src/__mocks__/svgMock.js"
+    }
   }
 }
