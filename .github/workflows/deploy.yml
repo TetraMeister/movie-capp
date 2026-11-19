@@ -34,10 +34,20 @@ jobs:
         env:
           CI: true
 
+      - name: Check OMDb API key
+        if: github.event_name != 'pull_request'
+        env:
+          REACT_APP_API_KEY: ${{ secrets.OMDB_API_KEY || vars.OMDB_API_KEY }}
+        run: |
+          if [ -z "$REACT_APP_API_KEY" ]; then
+            echo "::error::OMDB_API_KEY is not set. Add it as a repository secret (Settings → Secrets and variables → Actions → Repository secrets)."
+            exit 1
+          fi
+
       - run: npm run build
         env:
           CI: true
-          REACT_APP_API_KEY: ${{ secrets.OMDB_API_KEY }}
+          REACT_APP_API_KEY: ${{ secrets.OMDB_API_KEY || vars.OMDB_API_KEY }}
 
       # GitHub Pages has no SPA fallback, so serve index.html for unknown paths
       - run: cp build/index.html build/404.html
